@@ -3,7 +3,7 @@ import requests
 import time
 
 # Define your Zulip credentials
-ZULIP_API_URL = os.environ.get('ZULIP_AP_URL')
+ZULIP_API_URL = os.environ.get('ZULIP_API_URL')
 ZULIP_EMAIL = os.environ.get('ZULIP_EMAIL')
 ZULIP_API_KEY = os.environ.get('ZULIP_API_KEY')
 ZULIP_STREAM_NAME = os.environ.get('ZULIP_STREAM_NAME')
