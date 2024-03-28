@@ -32,7 +32,7 @@ def fetch_latest_articles(category_list):
             updated_str = article.split("<updated>")[1].split("</updated>")[0]
             updated_time = datetime.strptime(updated_str, "%Y-%m-%dT%H:%M:%S%z")
             current_time = datetime.now(timezone.utc)
-            if current_time - updated_time <= timedelta(hours=24):
+            if current_time - updated_time <= timedelta(hours=1):
                 title = article.split("<title>")[1].split("</title>")[0].replace('$^{\\ast}$', '* ').replace('$^*$', '* ').replace('$^*$', '* ').replace("$", "$$").replace("\n", " ")
                 author_list = article.split("<author>")[1:] # list of authors
                 authors = ", ".join([name.split("<name>")[1].split("</name>")[0] for name in author_list])
