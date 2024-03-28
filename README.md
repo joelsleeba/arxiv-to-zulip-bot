@@ -8,4 +8,4 @@
   - Add `ZULIP_EMAIL` as the email id for the bot
   - Add `ZULIP_API_KEY`. This you can get from the bot settings in zulip
 3. Change `ARXIV_CATEGORIES` to your required categories in `main.py`
-4. Set required interval to run the script using the cron expression in `.github/workflow/zulip-bot-workflow.yml`. [This website might help](https://crontab.cronhub.io/)
+4. Set required interval to run the script using the cron expression in `.github/workflow/zulip-bot-workflow.yml`. [This website might help](https://crontab.guru/)
