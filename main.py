@@ -32,14 +32,18 @@ def fetch_latest_articles(category_list):
             updated_str = article.split("<updated>")[1].split("</updated>")[0]
             updated_time = datetime.strptime(updated_str, "%Y-%m-%dT%H:%M:%S%z")
             current_time = datetime.now(timezone.utc)
-            if current_time - updated_time <= timedelta(hours=1):
-                title = article.split("<title>")[1].split("</title>")[0].replace('$^{\\ast}$', '* ').replace('$^*$', '* ').replace('$^*$', '* ').replace("$", "$$")
-                creator = article.split("<dc:creator>")[1].split("</dc:creator>")[0]
-                summary = article.split("Abstract: ")[1].split("</summary>")[0].replace('$^\{ast}$', '* ').replace('$^*$', '* ').replace("$", "$$")
+            if current_time - updated_time <= timedelta(hours=24):
+                title = article.split("<title>")[1].split("</title>")[0].replace('$^{\\ast}$', '* ').replace('$^*$', '* ').replace('$^*$', '* ').replace("$", "$$").replace("\n", " ")
+                author_list = article.split("<author>")[1:] # list of authors
+                authors = ", ".join([name.split("<name>")[1].split("</name>")[0] for name in author_list])
+                summary = article.split("<summary>")[1].split("</summary>")[0].replace('$^\{ast}$', '* ').replace('$^*$', '* ').replace("$", "$$").replace("\n  ", "😉").replace("\n", " ").replace("😉", "\n  ")
+
+
                 link = article.split('<link href="')[1].split('"')[0]
                 category= article.split('<category term="')[1].split('"')[0]
-                message = f"\n**{title}**\n*{creator}*\n\n{summary}\n{category}: {link}"
+                message = f"\n**{title}**\n*{authors}*\n\n{summary}\n{category}: {link}"
                 send_zulip_message(message)
+                # print(message)
     else:
         print(response.text)
 
