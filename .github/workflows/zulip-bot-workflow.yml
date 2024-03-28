@@ -6,26 +6,26 @@ on:
   schedule:
     - cron: "0 */1 * * *"
 
+
+env:
+  ZULIP_API_KEY: ${{ secrets.ZULIP_API_KEY }}
+  ZULIP_EMAIL: ${{ secrets.ZULIP_EMAIL }}
+  ZULIP_SITE: ${{ secrets.ZULIP_SITE}}
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-    - name: Install dependencies
-      run: pip install requests
+      - name: Install dependencies
+        run: pip install requests, zulip
 
-    - name: Run script
-      run: python main.py
-      env:
-        ZULIP_API_URL: ${{ secrets.ZULIP_API_URL }}
-        ZULIP_EMAIL: ${{ secrets.ZULIP_EMAIL }}
-        ZULIP_API_KEY: ${{ secrets.ZULIP_API_KEY }}
-        ZULIP_STREAM_NAME: ${{ secrets.ZULIP_STREAM_NAME }}
+      - name: Run script
+        run: python main.py
