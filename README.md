@@ -12,4 +12,4 @@
   - Add `ZULIP_API_KEY`. This you can get from the bot settings in zulip
 3. Change `ARXIV_CATEGORIES` to your required categories in `main.py`
 
-![Screenshot](./screenshot.jpeg)
+![Screenshot](./screenshot.jpg)
