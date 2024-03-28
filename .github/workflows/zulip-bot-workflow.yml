@@ -2,7 +2,7 @@ name: ArXiv to Zulip Bot
 
 on:
   schedule:
-    - cron: "15 */1 * * *"
+    - cron: "27 */1 * * *"
 
 
 env:
