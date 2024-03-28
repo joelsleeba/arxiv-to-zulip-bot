@@ -25,7 +25,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install requests, zulip
+        run: pip install requests zulip
 
       - name: Run script
         run: python main.py
