@@ -54,7 +54,7 @@ def last_article_update_link():
 
 # Function to fetch latest articles from arXiv
 def update_zulip_stream(category_list):
-    url = f"http://export.arxiv.org/api/query?search_query=cat:{category_list}&sortBy=lastUpdatedDate&sortOrder=descending&start=0&max_result=15"
+    url = f"http://export.arxiv.org/api/query?search_query=cat:{category_list}&sortBy=lastUpdatedDate&sortOrder=descending&start=0&max_result=100"
     response = requests.get(url)
     last_updated_article_link = last_article_update_link()
     if response.status_code == 200:
