@@ -25,7 +25,7 @@ def send_zulip_message(content):
 
 # Get the url of the last article update sent to the stream
 def last_article_update_link():
-    client = zulip.Client(email=ZULIP_EMAIL, client='test-github-client/0.1')
+    client = zulip.Client(email=ZULIP_EMAIL, client='arxiv-bot-github-actions/0.1')
     request: Dict[str, Any] = {
         "anchor": "newest",
         "num_before": 1,
@@ -49,7 +49,7 @@ def last_article_update_link():
         else:
             return None
     else:
-        print(f"Failed to retrieve message: {response.text}")
+        print(f"Failed to retrieve message or No previous messages")
         return None
 
 # Function to fetch latest articles from arXiv
@@ -59,7 +59,7 @@ def update_zulip_stream(category_list):
     last_updated_article_link = last_article_update_link()
     if response.status_code == 200:
         articles = response.text.split("<entry>")
-        flag = True  #Used to skip articles until the last_updated_article_link is reached
+        flag = True if last_updated_article_link else False # To avoid the case when not having an article ends up not getting to the execution part of the for loop
         # Skip the first element which is not an article
         for article in articles[1:][::-1]: #This is to get the list in ascending order by time
             link = article.split('<link href="')[1].split('"')[0]
@@ -73,7 +73,8 @@ def update_zulip_stream(category_list):
             summary = article.split("<summary>")[1].split("</summary>")[0].replace('$^{\\ast}$', '* ').replace('$^*$', '* ').replace("$", "$$").replace("\n  ", "😉").replace("\n", " ").replace("😉", "\n  ")
             category= article.split('<category term="')[1].split('"')[0]
             message = f"\n**[{title}]({link})**\n*{authors}*\n\n{summary}\n{category}: {link}"
-            send_zulip_message(message)
+            # send_zulip_message(message)
+            print(message)
     else:
         print(response.text)
 
