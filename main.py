@@ -7,7 +7,7 @@ from datetime import datetime, timedelta, timezone
 
 # Define your Zulip credentials
 ZULIP_EMAIL = os.environ.get('ZULIP_EMAIL')
-ZULIP_STREAM_NAME = 'research'
+ZULIP_STREAM_NAME = 'articles'
 ZULIP_TOPIC_NAME = 'New arXiv articles'
 
 # Define arXiv categories
@@ -70,9 +70,9 @@ def update_zulip_stream(category_list):
             title = article.split("<title>")[1].split("</title>")[0].replace('$^{\\ast}$', '* ').replace('$^*$', '* ').replace('$^*$', '* ').replace("$", "$$").replace("\n", " ")
             author_list = article.split("<author>")[1:] # list of authors
             authors = ", ".join([name.split("<name>")[1].split("</name>")[0] for name in author_list])
-            summary = article.split("<summary>")[1].split("</summary>")[0].replace('$^\{ast}$', '* ').replace('$^*$', '* ').replace("$", "$$").replace("\n  ", "😉").replace("\n", " ").replace("😉", "\n  ")
+            summary = article.split("<summary>")[1].split("</summary>")[0].replace('$^{\\ast}$', '* ').replace('$^*$', '* ').replace("$", "$$").replace("\n  ", "😉").replace("\n", " ").replace("😉", "\n  ")
             category= article.split('<category term="')[1].split('"')[0]
-            message = f"\n**{title}**\n*{authors}*\n\n{summary}\n{category}: {link}"
+            message = f"\n**[{title}]({link})**\n*{authors}*\n\n{summary}\n{category}: {link}"
             send_zulip_message(message)
     else:
         print(response.text)
