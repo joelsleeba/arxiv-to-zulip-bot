@@ -84,7 +84,7 @@ def update_zulip_stream(category_list):
             summary = article.summary.replace('$^{\\ast}$', '* ').replace(
                 '$^*$', '* ').replace("$", "$$").replace("\n  ", "😉").replace("\n", " ").replace("😉", "\n  ")
             categories = ", ".join([i.term for i in article.tags])
-            message = f"\n**[{title}]({link})**\n*{authors}*\n\n{summary}\n*{categories}*"
+            message = f"\n**[{title}]({link})**\n*{authors}*\n\n{summary}\n\n*{categories}*"
             print(message)
             send_zulip_message(message)
     else:
