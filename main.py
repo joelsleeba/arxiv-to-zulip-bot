@@ -57,7 +57,7 @@ def last_article_update_link():
 
 # Function to fetch latest articles from arXiv
 def update_zulip_stream(category_list):
-    url = f"http://rss.arxiv.org/atom/{category_list}"
+    url = f"https://rss.arxiv.org/atom/{category_list}"
     d = feedparser.parse(url)
     last_updated_article_link = last_article_update_link()
     current_article_links = print(
