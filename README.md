@@ -1,4 +1,5 @@
 # ArXiv-to-Zulip bot
+(not working right now, trying to figure a way around arxiv api rate limiting max_results at 10)
 
 ## How to Setup
 1. Create a generic bot in your Zulip Organization
