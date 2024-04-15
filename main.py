@@ -91,7 +91,7 @@ def update_zulip_stream(category_list):
                 f"\n**[{title}]({link})**\n*{author}*\n\n{summary}\n\n*{categories}*"
             )
             print(message)
-            # send_zulip_message(message)
+            send_zulip_message(message)
     else:
         print("Atom feed already parsed or Connection Error")
 
